@@ -1,19 +1,13 @@
 import smtplib, ssl
 from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
-import os
-import shutil
-from time import sleep
+
 from tqdm import tqdm
-
-from mailmerge import MailMerge
-import openpyxl
-from docx2pdf import convert
 import os
-from PyPDF2 import PdfFileMerger
 
+# root folder: folder containing the PDFs to fax
 root_folder = "C:\\Users\\Elon\\Desktop\\Exceltoword\\work\\combined\\"
+# to_folder: folder that will contain all the PDFs that have been sent
 to_folder = "C:\\Users\\Elon\\Desktop\\Exceltoword\\work\\sent\\"
 
 class Mail:
@@ -21,8 +15,10 @@ class Mail:
 	def __init__(self):
 		self.port = 587
 		self.smtp_server_domain_name = "smtp.gmail.com"
-		self.sender_mail = "office.hadar.shamir@gmail.com"
-		self.password = "apgqxpmrocszhnqm"
+		# add Email address
+		self.sender_mail = ""
+		# add one time password
+		self.password = ""
 
 	def send(self, email, subject, path):
 		message = MIMEMultipart('mixed')
@@ -50,7 +46,8 @@ class Mail:
 if __name__ == '__main__':
 	for filename in tqdm(os.listdir(root_folder)):
 		path = filename[0:-4]
-		mails = "03-6926484@myfax.co.il"
+		# add the fax number/mail
+		mails = ""
 		subject = path
 		mail = Mail()
 		mail.send(mails, subject, path)
